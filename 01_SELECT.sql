@@ -288,7 +288,7 @@ WHERE DEPT_CODE IN ('D1','D6','D9');
 SELECT EMP_ID , EMP_NAME , DEPT_CODE
 FROM EMPLOYEE
 WHERE DEPT_CODE NOT IN ('D1','D6','D9') -- 12AUD (NULL 미포함)
-OR DEPT_CODE IS NULL; -- 부서ㅗ드가 없는 (NULL) 2명 포함 14명 조회
+OR DEPT_CODE IS NULL; -- 부서코드가 없는 (NULL) 2명 포함 14명 조회
 
 ------------------------------------------------------------------
 
