@@ -103,21 +103,64 @@ SELECT * FROM EMPLOYEE;
 
 
 
-SELECT * FROM TB_USER;
+SELECT * FROM EMPlOYEE
+WHERE DEPT_CODE = 'D8'
+ORDER BY DEPT_CODE;
 
-INSERT INTO TB_USER VALUES(''
- )
+
+
 
 -- 6. 부서별 입사일이 가장 빠른 사원의
 -- 사번, 이름, 부서명(NULL이면 '소속없음'), 직급명, 입사일을 조회하고
 -- 입사일이 빠른 순으로 조회하시오
 -- 단, 퇴사한 직원은 제외하고 조회.
+ 
+ -- 6. 부서별 입사일이 가장 빠른 사원의
+SELECT NVL(DEPT_CODE,'소속없음'), MIN(HIRE_DATE)
+FROM EMPLOYEE
+WHERE ENT_YN = 'N'
+GROUP BY DEPT_CODE;
+
+
+SELECT * FROM JOB;
+-- 메인쿼리
+SELECT EMP_ID , EMP_NAME , NVL(DEPT_CODE,'소속없음'),
+JOB_NAME, HIRE_DATE
+FROM EMPLOYEE
+JOIN JOB USING (JOB_CODE)
+WHERE (DEPT_CODE,HIRE_DATE) IN (SELECT NVL(DEPT_CODE,'소속없음'), MIN(HIRE_DATE)
+                                FROM EMPLOYEE
+                                WHERE ENT_YN = 'N'
+                                GROUP BY DEPT_CODE);
+
+SELECT EMP_ID , EMP_NAME ,NVL(DEPT_CODE,'소속없음'),DEPT_TITLE
+JOB_NAME, HIRE_DATE
+FROM EMPLOYEE
+JOIN JOB USING (JOB_CODE)
+LEFT JOIN DEPARTMENT ON (DEPARTMENT.DEPT_ID =EMPLOYEE.DEPT_CODE )
+WHERE (NVL(DEPT_CODE,'소속없음'),HIRE_DATE) IN (SELECT  NVL(DEPT_CODE,'소속없음') ,MIN(HIRE_DATE)
+                                FROM EMPLOYEE
+                                GROUP BY DEPT_CODE)
+                               
+AND ENT_YN = 'N'
+ORDER BY HIRE_DATE;
+
+ 
+ SELECT * FROM EMPLOYEE;
+ 
+ 
+ 
 
 
 -- 7. 직급별 나이가 가장 어린 직원의
 -- 사번, 이름, 직급명, 나이, 보너스 포함 연봉을 조회하고
 -- 나이순으로 내림차순 정렬하세요
 -- 단 연봉은 \124,800,000 으로 출력되게 하세요. (\ : 원 단위 기호)
+
+SELECT TRUNC ('1234875456',-5) FROM DUAL;
+
+SELECT FLOOR((SYSDATE-TO_DATE(SUBSTR('630709-2054321',1,6),'RRMMDD'))/365)"나이" FROM DUAL;
+
 
 
 -------------------------------------------------------------------------
