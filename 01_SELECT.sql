@@ -335,7 +335,7 @@ WHERE BONUS IS NULL; --14명
 
 SELECT EMP_ID, EMP_NAME , SALARY
 FROM EMPLOYEE
-ORDER BY SALARY DESC; -- ASC (오름차순)가 기본값  [ASC | DESC]
+ORDER BY SALARY ; -- ASC (오름차순)가 기본값  [ASC | DESC]
 -- 컬럼명 사용 .
 
 -- EMPLOYEE 테이블에서 

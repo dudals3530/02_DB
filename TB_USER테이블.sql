@@ -51,5 +51,37 @@ FROM TB_USER
 WHERE USER_ID = 'user01';
 
 
+--김영희 회원과 같은 지역에 사는 회원들의 지역명, 아이디, 이름, 등급명을 이름 오름차순으로 조회
+
+
+ -- 노옹철과 같은 지역에 사는 사원의 지역명, 사번, 이름 직급명을 이름 오름차순
+
+SELECT * FROM EMPLOYEE;
+
+SELECT DEPT_TITLE 지역명, EMPLOYEE.EMP_NO  아이디, EMP_NAME 이름, 
+JOB_NAME 등급명
+FROM EMPLOYEE MAIN
+JOIN JOB USING(JOB_CODE)
+JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+WHERE JOB_CODE = (
+             SELECT JOB_CODE
+             FROM EMPLOYEE SUB
+             WHERE EMP_NAME = '노옹철')
+ORDER BY EMP_NAME DESC;​
+
 
 COMMIT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
